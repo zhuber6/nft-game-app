@@ -6,6 +6,7 @@ import SelectCharacter from './Components/SelectCharacter';
 import { CONTRACT_ADDRESS, transformCharacterData } from './constants';
 import myEpicGame from './utils/MyEpicGame.json';
 import Arena from './Components/Arena';
+import LoadingIndicator from './Components/LoadingIndicator';
 
 // Constants
 const TWITTER_HANDLE = '_buildspace';
@@ -15,6 +16,7 @@ const App = () => {
 
   const [currentAccount, setCurrentAccount] = useState(null);
   const [characterNFT, setCharacterNFT] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const checkIfWalletIsConnected = async () => {
     try {
@@ -22,6 +24,9 @@ const App = () => {
 
       if (!ethereum) {
         console.log('Make sure you have MetaMask!');
+        
+        // We set isLoading here before return
+        setIsLoading(false);
         return;
       } else {
         console.log('We have the ethereum object', ethereum);
@@ -39,10 +44,18 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
+
+    // Release the state property after all the function logic
+    setIsLoading(false);
   };
 
   // Render Methods
   const renderContent = () => {
+    // If the app is currently loading, just render out LoadingIndicator
+    if (isLoading) {
+      return <LoadingIndicator />;
+    }
+    
     if (!currentAccount) {
       return (
         <div className="connect-wallet-container">
@@ -86,6 +99,12 @@ const App = () => {
   };
 
   useEffect(() => {
+    // Anytime component mounts, immiediately set loading state
+    setIsLoading(true);
+    checkIfWalletIsConnected();
+  }, []);
+
+  useEffect(() => {
     const fetchNFTMetadata = async () => {
       console.log('Checking for Character NFT on address:', currentAccount);
 
@@ -101,6 +120,9 @@ const App = () => {
       if (txn.name) {
         console.log('User has character NFT');
         setCharacterNFT(transformCharacterData(txn));
+
+        // Once fetching complete, set loading state to false
+        setIsLoading(false);
       } else {
         console.log('No character NFT found');
       }
