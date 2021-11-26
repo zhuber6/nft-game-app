@@ -60,7 +60,7 @@ const App = () => {
       return (
         <div className="connect-wallet-container">
           <img
-            src="https://64.media.tumblr.com/tumblr_lxczu6Am2O1qb5ym2o1_500.gifv"
+            src={`https://cloudflare-ipfs.com/ipfs/QmR1WqGGWs5zmDossuFEVTgavTLk54eVV5fs86FpoeqNTQ`}
             alt="Always Sunny wave Gif"
           />
           <button

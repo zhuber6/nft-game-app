@@ -36,7 +36,8 @@ const SelectCharacter = ({ setCharacterNFT }) => {
       <div className="name-container">
         <p>{character.name}</p>
       </div>
-      <img src={character.imageURI} alt={character.name} />
+      <img src={`https://cloudflare-ipfs.com/ipfs/${character.imageURI}`}
+      alt={character.name} />
       <button
         type="button"
         className="character-mint-button"
@@ -127,10 +128,10 @@ const SelectCharacter = ({ setCharacterNFT }) => {
             <LoadingIndicator />
             <p>Minting In Progress...</p>
           </div>
-          <img
+          {/* <img
             src="https://media2.giphy.com/media/61tYloUgq1eOk/giphy.gif?cid=ecf05e47dg95zbpabxhmhaksvoy8h526f96k4em0ndvx078s&rid=giphy.gif&ct=g"
             alt="Minting loading indicator"
-          />
+          /> */}
         </div>
       )}
     </div>
