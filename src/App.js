@@ -60,7 +60,7 @@ const App = () => {
       return (
         <div className="connect-wallet-container">
           <img
-            src={`https://cloudflare-ipfs.com/ipfs/QmR1WqGGWs5zmDossuFEVTgavTLk54eVV5fs86FpoeqNTQ`}
+            src={`https://gateway.pinata.cloud/ipfs/QmR1WqGGWs5zmDossuFEVTgavTLk54eVV5fs86FpoeqNTQ`}
             alt="Always Sunny wave Gif"
           />
           <button
